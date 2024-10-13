@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './App.css'; // Import the CSS file for styling
 
 function App() {
-    const [todos, setTodos] = useState([]);
-    const [title, setTitle] = useState('');
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false); // Show loading spinner during API calls
+    const [todos, setTodos] = useState([]); // State to hold list of todos
+    const [title, setTitle] = useState(''); // State to hold the new todo title
+    const [error, setError] = useState(null); // State to hold error messages
+    const [loading, setLoading] = useState(false); // State to handle loading spinner
 
+    // Fetch todos from the backend when the component mounts
     useEffect(() => {
         fetchTodos();
     }, []);
 
+    // Function to fetch all todos from the backend API
     const fetchTodos = async () => {
         setLoading(true);
         try {
@@ -27,6 +29,7 @@ function App() {
         }
     };
 
+    // Function to add a new todo
     const addTodo = async () => {
         if (!title.trim()) {
             setError('Todo title cannot be empty');
@@ -56,6 +59,7 @@ function App() {
         }
     };
 
+    // Function to toggle the completion status of a todo
     const toggleTodo = async (id) => {
         setLoading(true);
         try {
@@ -75,6 +79,7 @@ function App() {
         }
     };
 
+    // Function to delete a todo
     const deleteTodo = async (id) => {
         setLoading(true);
         try {
